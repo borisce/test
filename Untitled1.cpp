@@ -83,3 +83,24 @@ void v_funkcia(NEHNUTELNOST *f_prvy){  //vypis prvkov zoznamu
 	akt=akt->dalsi;	
  }
 }
+NEHNUTELNOST * p_funkcia(NEHNUTELNOST *f_prvy){
+  NEHNUTELNOST *akt, *pom1,*vlozeny;
+  int pocet=1, index;
+  char koniec='\n';
+  vlozeny = (NEHNUTELNOST *) malloc(sizeof(NEHNUTELNOST)); 
+  scanf("%d\n", &index);
+  gets(vlozeny->typ_neh); //nacitanie vlozeneho prvku z konzoly
+  gets(vlozeny->miesto);
+  gets(vlozeny->ulica);
+  scanf("%d\n", &vlozeny->rozloha);
+  scanf("%d\n", &vlozeny->cena);
+  gets(vlozeny->popis);
+  strncat(vlozeny->typ_neh, &koniec, 1);
+  strncat(vlozeny->miesto, &koniec, 1);
+  strncat(vlozeny->ulica, &koniec, 1);
+  strncat(vlozeny->popis, &koniec, 1);
+  vlozeny->dalsi=NULL;
+  if(f_prvy==NULL){
+    f_prvy=vlozeny;
+    return f_prvy;  
+  }
