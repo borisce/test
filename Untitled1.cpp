@@ -104,3 +104,26 @@ NEHNUTELNOST * p_funkcia(NEHNUTELNOST *f_prvy){
     f_prvy=vlozeny;
     return f_prvy;  
   }
+  else{
+    akt=f_prvy;	  
+    while(akt!=NULL){
+	  if(index==1){
+	  	vlozeny->dalsi=f_prvy;
+	  	f_prvy=vlozeny;
+	  	return f_prvy;  	
+	  }
+	  if(pocet==(index-1)){
+	    pom1=akt->dalsi;
+	    akt->dalsi=vlozeny;
+		vlozeny->dalsi=pom1;
+		return f_prvy;
+	  }
+	  if(index>=pocet && akt->dalsi==NULL){
+        akt->dalsi=vlozeny;  
+        return f_prvy;
+      }
+	  pocet++;
+	  akt=akt->dalsi;		
+	}     
+  }
+}
