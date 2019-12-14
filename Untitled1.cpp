@@ -146,4 +146,29 @@ NEHNUTELNOST * z_funkcia(NEHNUTELNOST *f_prvy){
       	f_prvy=akt->dalsi;
       	free(akt);
       }
-      
+      else{
+	    if(akt->dalsi==NULL){
+	      pom1->dalsi=NULL;	
+	      free(akt);	
+	    }
+		else{
+		  pom2=akt->dalsi;
+		  pom1->dalsi=pom2;
+		  free(akt);
+		  akt=pom1->dalsi;
+		  kontrola=1;	
+		}	 	
+	  }  
+   }
+    if(kontrola==0){
+	  pom1=akt;
+	  akt=akt->dalsi;
+	}
+	for(i=0;i<53;i++)
+      miestovelke[i]=prazdny;	
+ }
+  printf("Vymazalo sa %d zaznamov\n", pocet);
+  return f_prvy;
+
+}
+
