@@ -65,3 +65,21 @@ NEHNUTELNOST * n_funkcia(FILE *fr, NEHNUTELNOST *prvy){
   printf("Nacitalo sa %d zaznamov\n", pocet);
   return prvy;
 }
+void v_funkcia(NEHNUTELNOST *f_prvy){  //vypis prvkov zoznamu
+  NEHNUTELNOST *akt;
+  int pocet=1;
+  akt=f_prvy;
+  if(f_prvy==NULL)
+  return;
+  while(akt!=NULL){
+    printf("%d.\n", pocet);
+    printf("kategoria ponuky: %s", akt->typ_neh);
+    printf("miesto ponuky: %s", akt->miesto);
+	printf("ulica: %s", akt->ulica);
+	printf("rozloha v m2: %d\n", akt->rozloha);
+	printf("cena: %d\n", akt->cena);
+	printf("popis: %s", akt->popis);
+	pocet+=1;
+	akt=akt->dalsi;	
+ }
+}
