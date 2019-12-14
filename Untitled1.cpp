@@ -146,4 +146,52 @@ NEHNUTELNOST * z_funkcia(NEHNUTELNOST *f_prvy){
       	f_prvy=akt->dalsi;
       	free(akt);
       }
-      
+      else{
+	    if(akt->dalsi==NULL){
+	      pom1->dalsi=NULL;	
+	      free(akt);	
+	    }
+		else{
+		  pom2=akt->dalsi;
+		  pom1->dalsi=pom2;
+		  free(akt);
+		  akt=pom1->dalsi;
+		  kontrola=1;	
+		}	 	
+	  }  
+   }
+    if(kontrola==0){
+	  pom1=akt;
+	  akt=akt->dalsi;
+	}
+	for(i=0;i<53;i++)
+      miestovelke[i]=prazdny;	
+ }
+  printf("Vymazalo sa %d zaznamov\n", pocet);
+  return f_prvy;
+
+}
+
+NEHNUTELNOST * a_funkcia(NEHNUTELNOST *f_prvy){
+  NEHNUTELNOST *akt;
+  char zmazmiesto[53], miestovelke[53], prazdny ,nacitaj[300], 
+  nacitaj2[300], a_typneh[53], a_miesto[53], a_ulica[103], a_popis[203];
+  int i,pocet=0, a_rozloha, a_cena;
+  char koniec='\n', a_typ_neh [53]  ;
+  scanf("%s", &zmazmiesto);
+  for(i=0;i<strlen(zmazmiesto);i++)
+    zmazmiesto[i]=toupper(zmazmiesto[i]); 
+  gets(nacitaj);  //nacitanie aktualizovanych udajov z konzoly
+  gets(nacitaj2);
+  gets(a_typ_neh);
+  gets(a_miesto);
+  gets(a_ulica);
+  scanf("%d\n", &a_rozloha);
+  scanf("%d\n", &a_cena);
+  gets(a_popis);
+  strncat(a_typ_neh, &koniec, 1);
+  strncat(a_miesto, &koniec, 1);
+  strncat(a_ulica, &koniec, 1);
+  strncat(a_popis, &koniec, 1);   
+  akt=f_prvy;
+  while(akt!=NULL){
