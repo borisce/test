@@ -127,3 +127,23 @@ NEHNUTELNOST * p_funkcia(NEHNUTELNOST *f_prvy){
 	}     
   }
 }
+
+NEHNUTELNOST * z_funkcia(NEHNUTELNOST *f_prvy){
+  NEHNUTELNOST *akt, *pom1, *pom2;
+  char zmazmiesto[53], miestovelke[53], prazdny;
+  int i,pocet=0, kontrola;
+  scanf("%s", &zmazmiesto);
+  for(i=0;i<strlen(zmazmiesto);i++)
+    zmazmiesto[i]=toupper(zmazmiesto[i]);     
+  akt=f_prvy;
+  while(akt!=NULL){  //hladanie zadaneho retazca v miestach ponuky pre jednotlive zaznamy
+  	kontrola=0;
+	for(i=0;i<strlen(akt->miesto);i++)
+        miestovelke[i]=toupper(akt->miesto[i]); 	  
+	if((strstr(miestovelke, zmazmiesto))!=NULL){
+      pocet++;
+      if(akt==f_prvy){
+      	f_prvy=akt->dalsi;
+      	free(akt);
+      }
+      
