@@ -146,4 +146,122 @@ NEHNUTELNOST * z_funkcia(NEHNUTELNOST *f_prvy){
       	f_prvy=akt->dalsi;
       	free(akt);
       }
-      
+      else{
+	    if(akt->dalsi==NULL){
+	      pom1->dalsi=NULL;	
+	      free(akt);	
+	    }
+		else{
+		  pom2=akt->dalsi;
+		  pom1->dalsi=pom2;
+		  free(akt);
+		  akt=pom1->dalsi;
+		  kontrola=1;	
+		}	 	
+	  }  
+   }
+    if(kontrola==0){
+	  pom1=akt;
+	  akt=akt->dalsi;
+	}
+	for(i=0;i<53;i++)
+      miestovelke[i]=prazdny;	
+ }
+  printf("Vymazalo sa %d zaznamov\n", pocet);
+  return f_prvy;
+
+}
+
+NEHNUTELNOST * a_funkcia(NEHNUTELNOST *f_prvy){
+  NEHNUTELNOST *akt;
+  char zmazmiesto[53], miestovelke[53], prazdny ,nacitaj[300], 
+  nacitaj2[300], a_typneh[53], a_miesto[53], a_ulica[103], a_popis[203];
+  int i,pocet=0, a_rozloha, a_cena;
+  char koniec='\n', a_typ_neh [53]  ;
+  scanf("%s", &zmazmiesto);
+  for(i=0;i<strlen(zmazmiesto);i++)
+    zmazmiesto[i]=toupper(zmazmiesto[i]); 
+  gets(nacitaj);  //nacitanie aktualizovanych udajov z konzoly
+  gets(nacitaj2);
+  gets(a_typ_neh);
+  gets(a_miesto);
+  gets(a_ulica);
+  scanf("%d\n", &a_rozloha);
+  scanf("%d\n", &a_cena);
+  gets(a_popis);
+  strncat(a_typ_neh, &koniec, 1);
+  strncat(a_miesto, &koniec, 1);
+  strncat(a_ulica, &koniec, 1);
+  strncat(a_popis, &koniec, 1);   
+  akt=f_prvy;
+  while(akt!=NULL){for(i=0;i<strlen(akt->miesto);i++)
+      miestovelke[i]=toupper(akt->miesto[i]); 	   
+	if((strstr(miestovelke, zmazmiesto))!=NULL){ //pridelovanie aktualizovanych hodnot vybranym prvkom zoznamu
+	  pocet++;
+      strcpy(akt->typ_neh, a_typ_neh);
+      strcpy(akt->miesto, a_miesto);
+      strcpy(akt->ulica, a_ulica);
+      akt->rozloha=a_rozloha;
+      akt->cena=a_cena; 
+	  strcpy(akt->popis, a_popis);
+   }
+    akt=akt->dalsi;  
+	for(i=0;i<53;i++)
+      miestovelke[i]=prazdny;	
+ }
+  printf("Aktualizovalo sa %d zaznamov\n", pocet);
+  return f_prvy; 
+}
+
+void h_funkcia(NEHNUTELNOST *f_prvy){  //vypis prvkov splnajucich cenove poziadavky
+  NEHNUTELNOST *akt;
+  int pocet=0, hladcena;
+  scanf("%d", &hladcena);    
+  akt=f_prvy;
+  while(akt!=NULL){
+     if(hladcena>=akt->cena){
+	  pocet++;
+	  printf("%d.\n", pocet);
+      printf("kategoria ponuky: %s", akt->typ_neh);
+      printf("miesto ponuky: %s", akt->miesto);
+	  printf("ulica: %s", akt->ulica);
+	  printf("rozloha v m2: %d\n", akt->rozloha);
+	  printf("cena: %d\n", akt->cena);
+	  printf("popis: %s", akt->popis);
+     }  
+	akt=akt->dalsi;
+	}
+  if(pocet==0)
+  printf("V ponuke su len reality s vyssou cenou\n");
+
+}
+  	
+int main(){
+  NEHNUTELNOST *prvy=NULL ,*akt, *pom1;	
+  FILE *fr;
+  char funkcia;	
+  while(1){
+	scanf("%c",&funkcia);
+    if(funkcia=='n')
+      prvy=n_funkcia(fr, prvy);
+	if(funkcia=='v')
+      v_funkcia(prvy);
+ 	if(funkcia=='p')
+      prvy=p_funkcia(prvy);
+    if(funkcia=='z')
+       prvy=z_funkcia(prvy);
+    if(funkcia=='a')
+       prvy=a_funkcia(prvy);   
+	if(funkcia=='h')
+       h_funkcia(prvy);      
+	if(funkcia=='k'){
+	  akt=prvy;
+	  while(akt!=NULL){  //uvolnenie pamate ak zoznam existoval
+	  pom1=akt;
+      akt=akt->dalsi;
+      free(pom1);	
+	  }
+	  return 0;
+   }    
+ }
+}
