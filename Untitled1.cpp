@@ -194,6 +194,7 @@ NEHNUTELNOST * a_funkcia(NEHNUTELNOST *f_prvy){
   strncat(a_ulica, &koniec, 1);
   strncat(a_popis, &koniec, 1);   
   akt=f_prvy;
+<<<<<<< HEAD
   while(akt!=NULL){for(i=0;i<strlen(akt->miesto);i++)
       miestovelke[i]=toupper(akt->miesto[i]); 	   
 	if((strstr(miestovelke, zmazmiesto))!=NULL){ //pridelovanie aktualizovanych hodnot vybranym prvkom zoznamu
@@ -265,3 +266,6 @@ int main(){
    }    
  }
 }
+=======
+  while(akt!=NULL){
+>>>>>>> fcaf5f4ff5868164175f236e1bfb8f2b468d71fe
